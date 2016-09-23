@@ -1,0 +1,42 @@
+html, body {
+  margin: 0;
+  background-color: black;
+}
+
+.commit {
+  width: 11.5%;
+  margin: 0.5%;
+  padding: 10px;
+  margin-bottom: 0%;
+  height: 200px;
+  border: solid 1px white;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  transition: all .2s ease-in-out;
+  background-color: black;
+  opacity: 0.6;
+  vertical-align: top;
+  &:hover {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.author {
+  font-size: 15px;
+}
+
+.date {
+  font-size: 10px;
+}
+
+.message {
+  margin-bottom: 15px;
+  color: yellow;
+  opacity: 1;
+  height: 108px;
+  overflow: hidden;
+}
