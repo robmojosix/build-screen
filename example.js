@@ -10,6 +10,7 @@ const Commit = (props) => {
         <div className="message">{props.message}</div>
         <div className="author">{props.author}</div>
         <div className="date">{props.date}</div>
+        <div className="time">{props.time}</div>
       </div>
    </a>
   )
@@ -21,6 +22,12 @@ var BuildScreen = React.createClass({
       commits: false
     };
   },
+
+  // searchTicketByName: function(){
+  //   var input = document.getElementById("search");
+  //   var filter = input.value.toUPPERCASE();
+  //   console.log(this.props.author);
+  // },
 
   componentDidMount: function() {
     this.getCommits();
@@ -48,6 +55,7 @@ var BuildScreen = React.createClass({
         return <Commit  key={i}
                         author={commit.commit.author.name}
                         date={new Date(commit.commit.author.date).toDateString()}
+                        time={new Date(commit.commit.author.date).toLocaleTimeString()}
                         message={commit.commit.message}
                         url={commit.html_url} />
       })
@@ -62,6 +70,6 @@ var BuildScreen = React.createClass({
 });
 
 ReactDOM.render(
-  <BuildScreen source="https://api.github.com/users/octocat/gists" />,
+  <BuildScreen source="a" />,
   document.getElementById('content')
 );
