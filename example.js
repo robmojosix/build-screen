@@ -70,6 +70,6 @@ var BuildScreen = React.createClass({
 });
 
 ReactDOM.render(
-  <BuildScreen source="a" />,
+  <BuildScreen source="https://api.github.com/users/octocat/gists" />,
   document.getElementById('content')
 );
