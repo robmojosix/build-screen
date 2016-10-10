@@ -44,8 +44,23 @@ var BuildScreen = React.createClass({
         return response.json();
      })
      .then((commits) => {
+       //let filteredCommits = this.filterCommits(commits)
        this.setState({commits: commits});
+       //this.setState({commits: filteredCommits});
      });
+  },
+
+  filterCommits: function(commits) {
+    let consumerCommits = [];
+    let consumerTeam = ['Jamie Brown', 'Rob Jones', 'Chris Temple', 'Chris Mckenzie', 'Rich Matthews'];
+    for (var i = 0; i < commits.length; i++) {
+      if (consumerTeam.indexOf(commits[i].commit.author.name) != -1) {
+        consumerCommits.push(commits[i]);
+      }
+    }
+    console.log(consumerCommits);
+
+    return consumerCommits;
   },
 
   render: function() {
