@@ -21,9 +21,9 @@ app.get('/', function(req, res) {
     res.sendfile('./index.html');
 });
 
-// app.get('/search.js', function(req, res) {
-//     res.sendfile('./search.js');
-// });
+app.get('/search.js', function(req, res) {
+    res.sendfile('./search.js');
+});
 
 app.get('/commits', function(req, res) {
   var commitDate = getDateFromDaysAgo(14);
