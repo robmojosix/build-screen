@@ -37,6 +37,31 @@ var BuildScreen = React.createClass({
     }, 300000); // 5 minutes
   },
 
+  getTodaysCommits: function(){
+    fetch('/commits').then((response) => {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+     })
+     .then((commits) => {
+       console.log('claicked');
+       var todaysCommits = [];
+       for (var i = 0; i < commits.length; i++) {
+         var today = new Date().toDateString();
+         var stringToDate = new Date(commits[i].commit.author.date).toDateString();
+         if (today == stringToDate){
+           todaysCommits.push(commits[i])
+         }
+       }
+       return todaysCommits;
+     })
+     .then((todaysCommits) => {
+       console.log(todaysCommits, 'tc');
+       this.setState({commits: todaysCommits});
+     })
+  },
+
   getCommits: function() {
     fetch('/commits').then((response) => {
         if (response.status >= 400) {
@@ -91,8 +116,9 @@ var BuildScreen = React.createClass({
     return (
       <div>
         <h1 id="heading"> Commits </h1>
-        <input type="submit" className="buttons" id="productAndContentTeamBtn" value="Product & Content Team" onClick={this.getProductAndContentCommits}/>
         <input type="submit" className="buttons" id="allBtn" value="All Commits" onClick={this.getCommits}/>
+        <input type="submit" className="buttons" id="productAndContentTeamBtn" value="Product & Content Team" onClick={this.getProductAndContentCommits}/>
+        <input type="submit" className="buttons" id="todayBtn" value="Today's Commits" onClick={this.getTodaysCommits}/>
         <br />
         {commits}
       </div>
