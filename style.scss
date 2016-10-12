@@ -3,6 +3,23 @@ html, body {
   background-color: black;
 }
 
+#heading {
+  color: grey;
+}
+
+.buttons {
+  background-color: grey;
+  color: black;
+  font-size: 15px;
+  margin: 5px;
+  border: red;
+}
+
+input[type=submit]:focus {
+  background-color: yellow;
+  outline: none;
+}
+
 .commit {
   width: 11.5%;
   margin: 0.5%;

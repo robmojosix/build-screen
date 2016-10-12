@@ -23,11 +23,11 @@ var BuildScreen = React.createClass({
     };
   },
 
-  // searchTicketByName: function(){
-  //   var input = document.getElementById("search");
-  //   var filter = input.value.toUPPERCASE();
-  //   console.log(this.props.author);
-  // },
+  searchTicketByName: function(){
+    // var input = document.getElementById("search");
+    // var filter = input.value.toUPPERCASE();
+    console.log("I work");
+  },
 
   componentDidMount: function() {
     this.getCommits();
@@ -44,23 +44,32 @@ var BuildScreen = React.createClass({
         return response.json();
      })
      .then((commits) => {
-       //let filteredCommits = this.filterCommits(commits)
        this.setState({commits: commits});
-       //this.setState({commits: filteredCommits});
+     });
+  },
+
+  getProductAndContentCommits: function() {
+    fetch('/commits').then((response) => {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+     })
+     .then((commits) => {
+       let filteredCommits = this.filterCommits(commits)
+       this.setState({commits: filteredCommits});
      });
   },
 
   filterCommits: function(commits) {
-    let consumerCommits = [];
-    let consumerTeam = ['Jamie Brown', 'Rob Jones', 'Chris Temple', 'Chris Mckenzie', 'Rich Matthews'];
+    let productAndContentCommits = [];
+    let productAndContentTeam = ['Jamie Brown', 'Robert Jones', 'Edward Kerry', 'Chris Temple', 'Chris Mckenzie', 'Rich Matthews'];
     for (var i = 0; i < commits.length; i++) {
-      if (consumerTeam.indexOf(commits[i].commit.author.name) != -1) {
-        consumerCommits.push(commits[i]);
+      if (productAndContentTeam.indexOf(commits[i].commit.author.name) != -1) {
+        productAndContentCommits.push(commits[i]);
       }
     }
-    console.log(consumerCommits);
-
-    return consumerCommits;
+    return productAndContentCommits;
   },
 
   render: function() {
@@ -75,9 +84,14 @@ var BuildScreen = React.createClass({
                         url={commit.html_url} />
       })
     }
+    /*<input id="search" onKeyUp={this.searchTicketByName} type="text" name="lname" placeholder="search" autoComplete="off" />*/
 
     return (
       <div>
+        <h1 id="heading"> Commits </h1>
+        <input type="submit" className="buttons" id="productAndContentTeamBtn" value="Product & Content Team" onClick={this.getProductAndContentCommits}/>
+        <input type="submit" className="buttons" id="allBtn" value="All Commits" onClick={this.getCommits}/>
+        <br />
         {commits}
       </div>
     );
