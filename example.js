@@ -24,42 +24,11 @@ var BuildScreen = React.createClass({
     };
   },
 
-  searchTicketByName: function(){
-    // var input = document.getElementById("search");
-    // var filter = input.value.toUPPERCASE();
-    console.log("I work");
-  },
-
   componentDidMount: function() {
     this.getCommits();
     setInterval(()=> {
       this.getCommits();
     }, 300000); // 5 minutes
-  },
-
-  getTodaysCommits: function(){
-    fetch('/commits').then((response) => {
-        if (response.status >= 400) {
-            throw new Error("Bad response from server");
-        }
-        return response.json();
-     })
-     .then((commits) => {
-       console.log('claicked');
-       var todaysCommits = [];
-       for (var i = 0; i < commits.length; i++) {
-         var today = new Date().toDateString();
-         var stringToDate = new Date(commits[i].commit.author.date).toDateString();
-         if (today == stringToDate){
-           todaysCommits.push(commits[i])
-         }
-       }
-       return todaysCommits;
-     })
-     .then((todaysCommits) => {
-       console.log(todaysCommits, 'tc');
-       this.setState({commits: todaysCommits});
-     })
   },
 
   getCommits: function() {
@@ -72,6 +41,59 @@ var BuildScreen = React.createClass({
      .then((commits) => {
        this.setState({commits: commits});
      });
+  },
+
+  searchTicketByName: function(){
+    fetch('/commits').then((response) => {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+     })
+     .then((commits) => {
+       var input = document.getElementById("search");
+       var filter = input.value.toUpperCase();
+       var tempCommits = [];
+       var returnedCommits = [];
+         for (var i = 0; i < commits.length; i++) {
+           tempCommits.push(commits[i])
+         }
+         console.log(tempCommits);
+         for (var i = 0; i < commits.length; i++) {
+           var commitMessageString = commits[i].commit.message;
+           if (commitMessageString.toUpperCase().indexOf(filter) != -1){
+             returnedCommits.push(commits[i])
+           }
+         }
+         return returnedCommits;
+     })
+     .then((returnedCommits) => {
+       this.setState({commits: returnedCommits});
+     });
+  },
+
+
+  getTodaysCommits: function(){
+    fetch('/commits').then((response) => {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+     })
+     .then((commits) => {
+       var todaysCommits = [];
+       for (var i = 0; i < commits.length; i++) {
+         var today = new Date().toDateString();
+         var stringToDate = new Date(commits[i].commit.author.date).toDateString();
+         if (today == stringToDate){
+           todaysCommits.push(commits[i])
+         }
+       }
+       return todaysCommits;
+     })
+     .then((todaysCommits) => {
+       this.setState({commits: todaysCommits});
+     })
   },
 
   getProductAndContentCommits: function() {
@@ -111,7 +133,6 @@ var BuildScreen = React.createClass({
                         url={commit.html_url} />
       })
     }
-    /*<input id="search" onKeyUp={this.searchTicketByName} type="text" name="lname" placeholder="search" autoComplete="off" />*/
 
     return (
       <div>
@@ -119,6 +140,8 @@ var BuildScreen = React.createClass({
         <input type="submit" className="buttons" id="allBtn" value="All Commits" onClick={this.getCommits}/>
         <input type="submit" className="buttons" id="productAndContentTeamBtn" value="Product & Content Team" onClick={this.getProductAndContentCommits}/>
         <input type="submit" className="buttons" id="todayBtn" value="Today's Commits" onClick={this.getTodaysCommits}/>
+        <input type="text" className="search" id="search" name="lname" placeholder="search" autoComplete="off" />
+        <input type="submit" className="search" id="go" autoComplete="off" onClick={this.searchTicketByName} />
         <br />
         {commits}
       </div>
