@@ -9,6 +9,7 @@ const Commit = (props) => {
       <div>
         <div className="message">{props.message}</div>
         <div className="author">{props.author}</div>
+        <div className="coauthor">{props.coauthor}</div>
         <div className="date">{props.date}</div>
         <div className="time">{props.time}</div>
       </div>
@@ -78,6 +79,7 @@ var BuildScreen = React.createClass({
       commits = this.state.commits.map((commit, i) => {
         return <Commit  key={i}
                         author={commit.commit.author.name}
+                        coauthor={commit.commit.committer.name}
                         date={new Date(commit.commit.author.date).toDateString()}
                         time={new Date(commit.commit.author.date).toLocaleTimeString()}
                         message={commit.commit.message}
