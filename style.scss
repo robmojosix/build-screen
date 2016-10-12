@@ -24,14 +24,15 @@ input[type=submit]:focus {
   width: 11.5%;
   margin: 0.5%;
   padding: 10px;
-  margin-bottom: 0%;
-  height: 200px;
+  margin-bottom: 5px;
+  height: 210px;
   border: solid 1px white;
   display: inline-block;
   box-sizing: border-box;
   border-radius: 5px;
   text-decoration: none;
   color: white;
+  font-family: Palatino Linotype;
   transition: all .2s ease-in-out;
   background-color: black;
   opacity: 0.6;
@@ -46,16 +47,22 @@ input[type=submit]:focus {
   font-size: 15px;
 }
 
+.coauthor {
+  font-size: 12px;
+  color: #8a94a3;
+}
+
 .date {
-  font-size: 10px;
+  font-size: 12px;
+  color: red
 }
 .time {
-  font-size: 10px;
+  font-size: 12px;
   color: red;
 }
 
 .message {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   color: yellow;
   opacity: 1;
   height: 108px;
