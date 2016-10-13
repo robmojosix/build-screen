@@ -100,9 +100,21 @@ var BuildScreen = React.createClass({
     return productAndContentCommits;
   },
 
+  getDateFromDaysAgo: function(days){
+    const dayInMillis = 8.64e7;
+    const daysAgo = dayInMillis*days;
+    const commitDate = new Date(+new Date - daysAgo);
+
+    const year = commitDate.getFullYear();
+    const month = ('0' + (commitDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + commitDate.getDate()).slice(-2);
+
+    return day + "-" + month + "-" + year;
+
+  },
+
   dateTwoWeeksAgo: function(){
-    var twoWeeksAgo = new Date().toDateString();
-    // TODO: CHANGE TO 2 WEEKS AGO
+    var twoWeeksAgo = this.getDateFromDaysAgo(14);
     this.setState({twoWeeksAgo: twoWeeksAgo});
   },
 
