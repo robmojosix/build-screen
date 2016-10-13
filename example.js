@@ -20,11 +20,13 @@ const Commit = (props) => {
 var BuildScreen = React.createClass({
   getInitialState: function() {
     return {
+      allCommits: false,
       commits: false
     };
   },
 
   componentDidMount: function() {
+    this.dateTwoWeeksAgo();
     this.getCommits();
     setInterval(()=> {
       this.getCommits();
@@ -96,6 +98,12 @@ var BuildScreen = React.createClass({
       }
     }
     return productAndContentCommits;
+  },
+
+  dateTwoWeeksAgo: function(){
+    var twoWeeksAgo = new Date().toDateString();
+    // TODO: CHANGE TO 2 WEEKS AGO
+    this.setState({twoWeeksAgo: twoWeeksAgo});
   },
 
   render: function() {
