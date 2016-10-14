@@ -84,14 +84,14 @@ var BuildScreen = React.createClass({
   },
 
   getProductAndContentCommits: function() {
-    var commits = this.state.allCommits;
+     var commits = this.state.allCommits;
      let filteredCommits = this.filterCommits(commits)
      this.setState({commits: filteredCommits});
   },
 
   filterCommits: function(commits) {
     let productAndContentCommits = [];
-    let productAndContentTeam = ['Jamie Brown', 'Robert Jones', 'Edward Kerry', 'Chris Temple', 'Chris Mckenzie', 'Rich Matthews'];
+    let productAndContentTeam = ['Jamie Brown', 'Robert Jones', 'Edward Kerry', 'Chris Temple', 'Chris Mckenzie', 'Rich Matthews', 'Geza Kiss'];
     for (var i = 0; i < commits.length; i++) {
       if (productAndContentTeam.indexOf(commits[i].commit.author.name) != -1) {
         productAndContentCommits.push(commits[i]);
