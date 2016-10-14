@@ -3,22 +3,50 @@ html, body {
   background-color: black;
 }
 
+.headings {
+  color: grey;
+}
+
+.buttons {
+  background-color: grey;
+  color: black;
+  font-size: 15px;
+  margin: 5px;
+  border: red;
+}
+
+.search {
+  background-color: grey;
+  color: black;
+  font-size: 15px;
+  margin: 5px;
+  border: red;
+  outline: none;
+}
+
+input[type=submit]:focus {
+  background-color: yellow;
+  outline: none;
+}
+
 .commit {
   width: 11.5%;
   margin: 0.5%;
   padding: 10px;
-  margin-bottom: 0%;
-  height: 200px;
+  margin-bottom: 10px;
+  height: 250px;
   border: solid 1px white;
   display: inline-block;
   box-sizing: border-box;
   border-radius: 5px;
   text-decoration: none;
   color: white;
+  font-family: Palatino Linotype;
   transition: all .2s ease-in-out;
   background-color: black;
   opacity: 0.6;
   vertical-align: top;
+  font-size: 14px;
   &:hover {
     transform: scale(1.05);
     opacity: 1;
@@ -29,12 +57,23 @@ html, body {
   font-size: 15px;
 }
 
-.date {
-  font-size: 10px;
+.coauthor {
+  font-size: 12px;
+  color: #8a94a3;
 }
 
+.date {
+  font-size: 12px;
+  color: red
+}
+.time {
+  font-size: 12px;
+  color: red;
+}
+
+
 .message {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: yellow;
   opacity: 1;
   height: 108px;
